@@ -58,3 +58,17 @@ namespace SharkBait
            }
        }
    }
+=======
+
+namespace SharkBait
+{
+    public class UnitTest1
+    {
+        [Fact]
+        public void Test1()
+        {
+
+        }
+    }
+}
+>>>>>>> 2e0fb44fbe371f69c6148c3aaafe29273eb86d32
