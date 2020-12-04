@@ -22,6 +22,7 @@
         </e>
         <e p="SharkBait.csproj" t="IncludeRecursive" />
         <e p="UnitTest1.cs" t="Include" />
+        <e p="UnitTest1.cs.orig" t="Include" />
       </e>
       <e p="SharkBait.sln" t="IncludeFlat" />
     </e>
