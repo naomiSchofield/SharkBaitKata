@@ -1,4 +1,4 @@
-using System;
+using SharkBait;
 using Xunit;
 
 // Your friend invites you out to a cool floating pontoon around 1km off the beach. Among other things, the pontoon has a huge slide that drops you out right into the ocean, a small way from a set of stairs used to climb out.
@@ -22,39 +22,46 @@ using Xunit;
 // The pontoon, you, and the shark are all aligned in one dimension.
 //
 // If you make it, return "Alive!", if not, return "Shark Bait!". 
-    
-namespace SharkBait
-   {
-       public class SharkBaitTests
-       {
-           private int SharkSpeed = 15;
-           private int HumanSpeed = 16;
 
-           [Fact]
-           public void ReturnFastestCreature()
+namespace SharkBaitTests
+{
+    public class SharkBaitTests
+    {
+        private SharkChase _sharkChase;
+
+        private double _sharkSpeed;
+        private double _humanSpeed;
+        private double _sharkDistance;
+        private double _humanDistance;
+
+        public SharkBaitTests()
         {
-               var sharkChase = new SharkChase();
-               var fastest = sharkChase.Fastest(SharkSpeed, HumanSpeed);
-
-               Assert.Equal("human", fastest);
+           _sharkChase = new SharkChase();
+            _sharkSpeed = 10;
+            _humanSpeed = 5;
+            _sharkDistance = 1;
+            _humanDistance = 0.5;
         }
-       }
+        [Fact]
 
-       public class SharkChase
-       {
-           public string Fastest(int sharkSpeed, int humanSpeed)
-           {
-               if (sharkSpeed < humanSpeed)
-               {
-                   return "human";
-               }
+        public void ReturnCreatureWhoArrivesAtPontoonFirst()
+        {
+            var firstToPontoon = _sharkChase.First(_sharkDistance, _humanDistance, _sharkSpeed, _humanSpeed);
 
-               if (sharkSpeed < humanSpeed)
-               {
-                   return "shark";
-               }
+            Assert.Contains("gets to the pontoon first", firstToPontoon);
+        }
+        [Fact]
+        public void ReturnFastestCreature()
+        {
+            var fastest = _sharkChase.Fastest(_sharkSpeed, _humanSpeed);
+            Assert.Contains("is the fastest", fastest);
+        } 
 
-               return "They are the same speed";
-           }
-       }
-   }
+        [Fact]
+        public void ReturnTimeForSharkToGetToPlatform()
+        {
+            var timeToPlatform = _sharkChase.SharkTimeToPlatform(_sharkDistance, _sharkSpeed);
+            Assert.Equal(0.1, timeToPlatform);
+        }
+    }
+}
